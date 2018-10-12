@@ -21,18 +21,18 @@ function pages()
 
 function image_url($keyword)
 {
-	return Flight::request()->base . str_slug($keyword) . '.html';
+	return '' . str_slug($keyword) . '.html';
 }
 
 function page_url($page)
 {
-	return Flight::request()->base . 'pages/' . $page;
+	return '' . 'pages/' . $page;
 }
 
 
 function home_url()
 {
-	return Flight::request()->base;
+	return '';
 }
 
 function site_name()
