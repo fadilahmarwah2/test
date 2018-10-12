@@ -32,7 +32,7 @@ function page_url($page)
 
 function home_url()
 {
-	return '';
+	return '.';
 }
 
 function site_name()
