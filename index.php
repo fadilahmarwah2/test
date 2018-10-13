@@ -12,6 +12,11 @@ Flight::route('/pages/@page', function($page){
 
 Flight::route('/@slug.html', function($slug){
 	$data = get_data($slug);
+
+	if($data === false){
+		return Flight::redirect('/');
+	}
+
 	$data['keyword'] = str_replace('-', ' ', $slug);
 
     view('image', $data);
