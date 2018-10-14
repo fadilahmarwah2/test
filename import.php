@@ -4,6 +4,7 @@ require 'helpers.php';
 
 use Buchin\GoogleSuggest\GoogleSuggest;
 use Buchin\GoogleImageGrabber\GoogleImageGrabber;
+use Buchin\Badwords\Badwords;
 
 
 if(!isset($argv[1])){
@@ -16,9 +17,20 @@ echo "=> Gathering initial keywords\n";
 
 $keywords = explode(',', $argv[1]);
 
-foreach ($keywords as $keyword) {
+foreach ($keywords as $key => $keyword) {
+	if(Badwords::isDirty($keyword)){
+		unset($keywords[$key]);
+	}
+
 	foreach (range('a', 'z') as $char) {
-		$keywords = array_unique(array_merge($keywords, (array)@GoogleSuggest::grab($keyword . ' ' . $char)));
+		$init = (array)@GoogleSuggest::grab($keyword . ' ' . $char);
+		foreach ($init as $kw) {
+			if(!Badwords::isDirty($kw)){
+				$keywords[] = $kw;
+			}
+		}
+
+		$keywords = array_unique($keywords);
 
 		echo '.';
 	}
