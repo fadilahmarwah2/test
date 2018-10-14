@@ -16,6 +16,9 @@ if(!isset($argv[1])){
 echo "=> Gathering initial keywords\n";
 
 $keywords = explode(',', $argv[1]);
+$lang = isset($argv[2]) ? $argv[2] : '';
+$country = isset($argv[3]) ? $argv[3] : '';
+$source = 'i';
 
 foreach ($keywords as $key => $keyword) {
 	if(Badwords::isDirty($keyword)){
@@ -23,7 +26,7 @@ foreach ($keywords as $key => $keyword) {
 	}
 
 	foreach (range('a', 'z') as $char) {
-		$init = (array)@GoogleSuggest::grab($keyword . ' ' . $char);
+		$init = (array)@GoogleSuggest::grab($keyword . ' ' . $char, $lang, $country, $source);
 		foreach ($init as $kw) {
 			if(!Badwords::isDirty($kw)){
 				$keywords[] = $kw;
@@ -37,6 +40,7 @@ foreach ($keywords as $key => $keyword) {
 
 	sleep(rand(1,5));
 }
+
 
 echo "\n
 =================================" . '
@@ -57,7 +61,7 @@ do {
 			'images' => [],
 		];
 
-		$related = (array)@GoogleSuggest::grab($keyword);
+		$related = (array)@GoogleSuggest::grab($keyword, $lang, $country, $source);
 
 		if(!empty($related)){
 			$new_keywords = [];
