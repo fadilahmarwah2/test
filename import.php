@@ -7,7 +7,7 @@ use Buchin\GoogleImageGrabber\GoogleImageGrabber;
 
 
 if(!isset($argv[1])){
-	echo "Please specify keyword: php import.php \"your keyword\"\n";
+	echo "Please specify keyword: php import.php \"keyword1,keyword2,keyword3\"\n";
 	die;
 }
 
@@ -16,7 +16,7 @@ echo "
 Importing: ' . $argv[1] . "
 =================================\n\n";
 
-$keywords = [$argv[1]];
+$keywords = explode(',', $argv[1]);
 
 $count = 1;
 
