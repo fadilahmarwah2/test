@@ -18,6 +18,7 @@ echo "=> Gathering initial keywords\n";
 $keywords = explode(',', $argv[1]);
 $lang = isset($argv[2]) ? $argv[2] : '';
 $country = isset($argv[3]) ? $argv[3] : '';
+$max = isset($argv[4]) ? $argv[4] : PHP_INT_MAX;
 $source = 'i';
 
 foreach ($keywords as $key => $keyword) {
@@ -51,6 +52,11 @@ $count = 1;
 
 do {
 	try {
+		if($count > $max){
+			echo "Import finished. Congratulations!\n";
+			die;
+		}
+
 		$keyword = array_shift($keywords);
 
 
