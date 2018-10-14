@@ -11,12 +11,25 @@ if(!isset($argv[1])){
 	die;
 }
 
-echo "
+
+echo "=> Gathering initial keywords\n";
+
+$keywords = explode(',', $argv[1]);
+
+foreach ($keywords as $keyword) {
+	foreach (range('a', 'z') as $char) {
+		$keywords = array_unique(array_merge($keywords, (array)@GoogleSuggest::grab($keyword . ' ' . $char)));
+
+		echo '.';
+	}
+
+	sleep(rand(1,5));
+}
+
+echo "\n
 =================================" . '
 Importing: ' . $argv[1] . "
 =================================\n\n";
-
-$keywords = explode(',', $argv[1]);
 
 $count = 1;
 
@@ -25,7 +38,7 @@ do {
 		$keyword = array_shift($keywords);
 
 
-		echo '=> scraping #' . $count . ': ' . str_slug($keyword) . "...\n";
+		echo '==> scraping #' . $count . ': ' . str_slug($keyword) . "...\n";
 
 		$data = [
 			'related' => [],
@@ -57,7 +70,7 @@ do {
 		}
 
 	} catch (\Exception $e) {
-		echo '==>' . $e->getMessage() . "\n";
+		echo '===>' . $e->getMessage() . "\n";
 		sleep(rand(5, 60));
 	}
 
