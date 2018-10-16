@@ -6,7 +6,6 @@ use Buchin\GoogleSuggest\GoogleSuggest;
 use Buchin\GoogleImageGrabber\GoogleImageGrabber;
 use Buchin\Badwords\Badwords;
 
-
 if(!isset($argv[1])){
 	echo "Please specify keyword: php import.php \"keyword1,keyword2,keyword3\"\n";
 	die;
@@ -65,7 +64,12 @@ do {
 		$data = [
 			'related' => [],
 			'images' => [],
+			'sentences' => [],
 		];
+
+		$sentences = (array)@get_sentences($keyword);
+
+		$data['sentences'] = $sentences;
 
 		$related = (array)@GoogleSuggest::grab($keyword, $lang, $country, $source);
 

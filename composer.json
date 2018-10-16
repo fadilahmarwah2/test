@@ -4,6 +4,7 @@
         "duncan3dc/blade": "^4.3",
         "buchin/google-suggest": "dev-master",
         "buchin/google-image-grabber": "dev-master",
-        "buchin/badwords": "dev-master"
+        "buchin/badwords": "dev-master",
+        "buchin/bing": "dev-master"
     }
 }

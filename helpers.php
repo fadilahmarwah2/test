@@ -1,10 +1,13 @@
 <?php
 use duncan3dc\Laravel\BladeInstance;
+use Buchin\Bing\Web;
+
 
 
 function view($template, $data = [])
 {
 	$blade = new BladeInstance(__DIR__ . '/views', __DIR__ . '/cache');
+	$blade->addPath(__DIR__ . '/ads');
 
 	echo $blade->render($template, $data);
 }
@@ -86,6 +89,26 @@ function is_se()
     }
 
     return false;
+}
+
+function get_sentences($keyword)
+{
+	$results = (new Web)->scrape($keyword);
+	$sentences = [];
+
+	foreach ($results as $result) {
+		$new_sentences = [];
+		foreach (preg_split('/(?<=[.?!;:])\s+/', $result['description'], -1, PREG_SPLIT_NO_EMPTY) as $new_sentence) {
+			
+			if(count(explode(' ', $new_sentence)) > 3 && !str_contains($new_sentence, ['.com', '.org', '.net', '.tk', '.pw'])){
+				$new_sentences[] = ucfirst(trim(str_slug($new_sentence, ' '))) . '.';
+			}
+		}
+
+		$sentences = array_merge($sentences, $new_sentences);
+	}
+
+	return $sentences;
 }
 
 function pu()

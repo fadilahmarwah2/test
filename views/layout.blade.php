@@ -71,7 +71,8 @@
 			}
 
 			.navi{
-				margin:5px;
+				margin:13px 0 13px 0;
+				padding:13px;
 			}
 
 			.navi a{
@@ -82,6 +83,7 @@
 		</style>
 
 		@yield('head')
+		@include('header')
 	</head>
 	<body>
 		<div id="title" class="text-center">
@@ -92,10 +94,8 @@
 				<div class="col-sm-12 text-center">
 
 					@yield('header')
+					@include('related')
 
-					<div class="navi">
-						@yield('navi')
-					</div>
 				</div>
 			</div>
 			<div class="row content">
@@ -113,7 +113,8 @@
 				</div>
 			</div>
 		</div>
-
+		@include('bar')
+		@include('footer')
 		{!! pu() !!}
 	</body>
 </html>
