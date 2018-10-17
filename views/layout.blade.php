@@ -16,9 +16,12 @@
 			    font-weight: 400;
 			    background: #f3f3f3;
 			}
+
 			#title{
 				font-family: "Mr Dafoe", Times, serif;
 			    font-size: 34px;
+			    background: rgba(255, 255, 255, 0.8);
+			    margin-bottom: 34px;
 			}
 
 			.header{
@@ -34,6 +37,7 @@
 
 			#title a{
 				color: #333;
+				margin-left: 21px;
 			}
 
 			#title a:hover{
@@ -86,7 +90,7 @@
 		@include('header')
 	</head>
 	<body>
-		<div id="title" class="text-center">
+		<div id="title" class="">
 			<a href="{{ home_url() }}">{{ site_name() }}</a>
 		</div>
 		<div class="container">
