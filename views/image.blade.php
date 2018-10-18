@@ -41,7 +41,7 @@
 		@if($loop->iteration == 2)
 			<div class="row">
 				<div class="col-md-12">
-					<div class="navi text-left">
+					<div class="text-left">
 						<h3>{{ @array_pop($sentences) }}</h3>
 						<img src="{{ collect($images)->random()['url'] }}" width="34%" align="left" style="margin-right: 8px;margin-bottom: 8px;">
 
