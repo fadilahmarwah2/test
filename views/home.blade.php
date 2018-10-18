@@ -5,7 +5,6 @@
 @endsection
 
 @section('bg')
-http://themes.iamabdus.com/kidz/1.5/assets/img/home/slider/slider-1.jpg
 @endsection
 
 @section('content')

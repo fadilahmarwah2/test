@@ -4,18 +4,23 @@
 <title>{{ ucwords($keyword) }}</title>
 @endsection
 
+@section('bg')
+{{ collect($images)->random()['url'] }}
+@endsection
+
 @section('header')
-<h1>{{ ucwords($keyword) }}</h1>
+	<h1>{{ ucwords($keyword) }}</h1>
 
-@php
-	shuffle($sentences);
-@endphp
+	@php
+		shuffle($sentences);
+	@endphp
 
-<div class="text-center">
-	@if(!empty($sentences))
-		<p>{{ @array_pop($sentences) }} {{ @array_pop($sentences) }}</p>
-	@endif
-</div>
+	<div class="text-center">
+		@if(!empty($sentences))
+			<p>{{ @array_pop($sentences) }} {{ @array_pop($sentences) }}</p>
+		@endif
+	</div>
+
 @endsection
 
 @section('content')

@@ -14,7 +14,9 @@
 			    font-family: "Open Sans", Arial, sans-serif;
 			    font-size: 14px;
 			    font-weight: 400;
-			    background: #f3f3f3;
+			    background: #f3f3f3 url(@yield('bg')) no-repeat center center fixed;
+				background-size: cover;
+				height: 100%;
 			}
 
 			#title{
