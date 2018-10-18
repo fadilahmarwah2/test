@@ -37,7 +37,7 @@ $backdate = isset($argv[1]) ? $argv[1] : date('Y-m-d');
 			$day = date('d', $unixtime);
 			$year = date('Y', $unixtime);
 
-			$post_content = view('export.wp-post', $data, false);
+			$post_content = view('export.post', $data, false);
 		@endphp
 		<item>
 			<title><![CDATA[{{ ucwords($keyword) }}]]></title>
