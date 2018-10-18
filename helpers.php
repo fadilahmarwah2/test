@@ -4,10 +4,14 @@ use Buchin\Bing\Web;
 
 
 
-function view($template, $data = [])
+function view($template, $data = [], $echo = true)
 {
 	$blade = new BladeInstance(__DIR__ . '/views', __DIR__ . '/cache');
 	$blade->addPath(__DIR__ . '/ads');
+
+	if(!$echo){	
+		return $blade->render($template, $data);
+	}
 
 	echo $blade->render($template, $data);
 }
