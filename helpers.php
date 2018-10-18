@@ -44,7 +44,7 @@ function home_url()
 
 function site_name()
 {
-	return ucwords(explode('.', $_SERVER['SERVER_NAME'])[0]);
+	return isset($_SERVER['SERVER_NAME']) ? ucwords(explode('.', $_SERVER['SERVER_NAME'])[0]) : $_SERVER['argv'][1];
 }
 
 

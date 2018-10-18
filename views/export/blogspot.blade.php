@@ -23,11 +23,9 @@ $backdate = isset($argv[1]) ? $argv[1] : date('Y-m-d');
 	<ns0:author>
 	<ns0:name>admin</ns0:name>
 	</ns0:author>
-	<ns0:content type="html">
-	@php
+	<ns0:content type="html">@php
 	$content = str_replace("\n", ' ', view('export.post', $data, false));
-	@endphp
-	{{ $content }}
+	@endphp {{ $content }}
 	</ns0:content>
 	<ns0:published>{{ date('Y-m-d', $timestamp) }}T{{ date('H:i:s', $timestamp) }}Z</ns0:published>
 	<ns0:title type="html">{{ ucwords($keyword) }}</ns0:title>
