@@ -59,6 +59,12 @@ function keywords()
 	return $keywords;
 }
 
+function random_post()
+{
+	$slug = str_slug(collect(keywords())->random());
+	return $slug . '.html';
+}
+
 function get_filename($keyword)
 {
 	return __DIR__ . '/data/' . str_slug($keyword) . '.srz.php';
