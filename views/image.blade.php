@@ -15,9 +15,15 @@
 		shuffle($sentences);
 	@endphp
 
-	<div class="text-center">
+	<div class="navi text-center">
 		@if(!empty($sentences))
-			<p>{{ @array_pop($sentences) }} {{ @array_pop($sentences) }}</p>
+			<p>{{ @array_pop($sentences) }} {{ @array_pop($sentences) }} {{ @array_pop($sentences) }} <br>
+				@foreach($related as $r)
+					@if(data_exists($r))
+						<a class="badge badge-{{ collect(['primary', 'secondary', 'success', 'info', 'danger', 'warning', 'light', 'dark'])->random() }}" href="{{ image_url($r) }}">{{ $r }}</a>
+					@endif
+				@endforeach
+			</p>
 		@endif
 	</div>
 
@@ -55,19 +61,6 @@
 									{{ $chunked_sentence }} 
 								@endforeach
 							</p>
-						@endforeach
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-md-12">
-					<div class="navi text-center bg-dark text-white">
-						<p>{{ @array_pop($sentences) }}</p>
-						@foreach($related as $r)
-							@if(data_exists($r))
-								<a class="badge badge-{{ collect(['primary', 'secondary', 'success', 'info', 'danger', 'warning', 'light', 'dark'])->random() }}" href="{{ image_url($r) }}">{{ $r }}</a>
-							@endif
 						@endforeach
 					</div>
 				</div>
