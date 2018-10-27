@@ -4,7 +4,7 @@ $site_url = 'http://example.com/';
 $category = isset($argv[2]) ? $argv[2] : 'Uncategorized';
 $backdate = isset($argv[1]) ? $argv[1] : date('Y-m-d');
 @endphp
-<?xml version=\"1.0\" encoding=\"UTF-8\"
+{!! '<' . '?' . 'xml version="1.0" encoding="UTF-8"' !!}
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.0/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -37,11 +37,7 @@ $backdate = isset($argv[1]) ? $argv[1] : date('Y-m-d');
 			$day = date('d', $unixtime);
 			$year = date('Y', $unixtime);
 
-<<<<<<< HEAD
 			$post_content = view('export.post', $data, false);
-=======
-			$post_content = view('export.wp-post', $data, false);
->>>>>>> ec7a639b89c84631d6309096f12e0f5474518b5a
 		@endphp
 		<item>
 			<title><![CDATA[{{ ucwords($keyword) }}]]></title>
