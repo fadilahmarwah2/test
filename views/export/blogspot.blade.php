@@ -1,7 +1,7 @@
 @php
 $backdate = isset($argv[1]) ? $argv[1] : date('Y-m-d');
 @endphp
-<?xml version='1.0' encoding='UTF-8'?>
+{!! '<' . '?' . "xml version='1.0' encoding='UTF-8'?>" !!}
 <ns0:feed xmlns:ns0="http://www.w3.org/2005/Atom">
 <ns0:title type="html">wpan.com</ns0:title>
 <ns0:generator>Blogger</ns0:generator>
