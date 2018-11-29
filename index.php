@@ -16,7 +16,7 @@ Flight::route('/@slug.html', function($slug){
 	if($data === false){
 		return Flight::redirect(random_post());
 	}
-
+	
 	$data['keyword'] = str_replace('-', ' ', $slug);
 
     view('image', $data);

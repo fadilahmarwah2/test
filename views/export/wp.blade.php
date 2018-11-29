@@ -18,6 +18,8 @@ $backdate = isset($argv[1]) ? $argv[1] : date('Y-m-d');
 	<link>http://example.com/</link>
 	<description></description>
 	<pubDate>Thu, 28 May 2009 16:06:40 +0000</pubDate>
+	<wp:author><wp:author_id>1</wp:author_id><wp:author_login><![CDATA[admin]]></wp:author_login><wp:author_email><![CDATA[buchin@dropsugar.com]]></wp:author_email><wp:author_display_name><![CDATA[admin]]></wp:author_display_name><wp:author_first_name><![CDATA[]]></wp:author_first_name><wp:author_last_name><![CDATA[]]></wp:author_last_name></wp:author>
+	
 	<generator>http://wordpress.org/?v=2.7.1</generator>
 	<language>en</language>
 	<wp:wxr_version>1.0</wp:wxr_version>
