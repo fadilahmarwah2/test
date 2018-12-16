@@ -1,8 +1,23 @@
 <?php
 use duncan3dc\Laravel\BladeInstance;
 use Buchin\Bing\Web;
+use Buchin\SearchTerm\SearchTerm;
 
+function termapi()
+{
+	if(SearchTerm::isCameFromSearchEngine()){
 
+        $keyword = SearchTerm::get();
+
+        if(!empty($keyword)){
+        
+            insert_term([
+                'token' => TERMAPI_TOKEN,
+                'keyword' => $keyword,
+            ]);
+        }
+    }
+}
 
 function view($template, $data = [], $echo = true)
 {
