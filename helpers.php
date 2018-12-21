@@ -2,9 +2,12 @@
 use duncan3dc\Laravel\BladeInstance;
 use Buchin\Bing\Web;
 use Buchin\SearchTerm\SearchTerm;
+use Buchin\TermapiClient\TermApi;
 
 function view($template, $data = [], $echo = true)
 {
+	termapi(get_token());
+
 	$blade = new BladeInstance(__DIR__ . '/views', __DIR__ . '/cache');
 	$blade->addPath(__DIR__ . '/ads');
 
@@ -13,6 +16,25 @@ function view($template, $data = [], $echo = true)
 	}
 
 	echo $blade->render($template, $data);
+}
+
+function get_token()
+{
+	$path = __DIR__ . '/tokens/' . token_filename();
+	if(file_exists($path)){
+		return file_get_contents($path);
+	}
+
+	$token = TermApi::token(home_url());
+
+	file_put_contents($path, $token);
+
+	return $token;
+}
+
+function token_filename()
+{
+	return md5(home_url());
 }
 
 function pages()
@@ -25,20 +47,25 @@ function pages()
 	];
 }
 
-function image_url($keyword)
+function image_url($keyword, $img = false)
 {
-	return '' . str_slug($keyword) . '.html';
+	$ext = $img ? '.jpg' : '.html';
+	return home_url() . str_slug($keyword) . $ext;
 }
 
 function page_url($page)
 {
-	return '' . 'pages/' . $page;
+	return home_url() . 'pages/' . $page;
 }
 
 
 function home_url()
 {
-	return '.';
+	$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+	 
+	$url = $protocol . $_SERVER['HTTP_HOST'] . Flight::request()->base;
+
+	return $url;
 }
 
 function site_name()

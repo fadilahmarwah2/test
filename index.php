@@ -11,6 +11,12 @@ Flight::route('/pages/@page', function($page){
     view('pages.page', ['page' => $page]);
 });
 
+Flight::route('/@slug.jpg', function($slug){
+	$data = get_data($slug);
+
+	return Flight::redirect(collect($data['images'])->random()['url']);
+});
+
 Flight::route('/@slug.html', function($slug){
 	$data = get_data($slug);
 
@@ -23,5 +29,4 @@ Flight::route('/@slug.html', function($slug){
     view('image', $data);
 });
 
-termapi('cb0f6f3a12aaa80a3588549935066c09');
 Flight::start();
