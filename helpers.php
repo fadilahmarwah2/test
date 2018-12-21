@@ -65,7 +65,7 @@ function home_url()
 	 
 	$url = $protocol . $_SERVER['HTTP_HOST'] . Flight::request()->base;
 
-	return $url;
+	return rtrim($url, '/') . '/';
 }
 
 function site_name()
