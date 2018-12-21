@@ -9,7 +9,7 @@
 
 @section('content')
 	@foreach(collect(keywords())->shuffle()->take(16)->chunk(4) as $chunked)
-		<div class="row">
+		<div class="row mt-3">
 			@foreach($chunked as $keyword)
 				<div class="col-md-3">
 					<p class="text-center">{{ $keyword }}</p>
