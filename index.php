@@ -1,6 +1,4 @@
 <?php
-define('TERMAPI_TOKEN', 'ganti dengan token ente');
-
 require 'vendor/autoload.php';
 require 'helpers.php';
 
@@ -25,5 +23,5 @@ Flight::route('/@slug.html', function($slug){
     view('image', $data);
 });
 
-termapi();
+termapi('cb0f6f3a12aaa80a3588549935066c09');
 Flight::start();

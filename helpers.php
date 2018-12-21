@@ -3,31 +3,6 @@ use duncan3dc\Laravel\BladeInstance;
 use Buchin\Bing\Web;
 use Buchin\SearchTerm\SearchTerm;
 
-function termapi()
-{
-	if(SearchTerm::isCameFromSearchEngine()){
-
-        $keyword = SearchTerm::get();
-
-        if(!empty($keyword)){
-        
-            insert_term([
-                'token' => TERMAPI_TOKEN,
-                'keyword' => $keyword,
-                'url' => current_url()
-            ]);
-        }
-    }
-}
-
-function current_url()
-{
-	$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
- 
-	$url = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-	return $url;
-}
-
 function view($template, $data = [], $echo = true)
 {
 	$blade = new BladeInstance(__DIR__ . '/views', __DIR__ . '/cache');
