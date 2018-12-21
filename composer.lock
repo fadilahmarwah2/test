@@ -202,12 +202,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/buchin/termapi-client.git",
-                "reference": "198094b3950ff987e5402cc69ea8df3bc44feedb"
+                "reference": "0452147585b67c8370c2cde7214fee7e53aac287"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/buchin/termapi-client/zipball/198094b3950ff987e5402cc69ea8df3bc44feedb",
-                "reference": "198094b3950ff987e5402cc69ea8df3bc44feedb",
+                "url": "https://api.github.com/repos/buchin/termapi-client/zipball/0452147585b67c8370c2cde7214fee7e53aac287",
+                "reference": "0452147585b67c8370c2cde7214fee7e53aac287",
                 "shasum": ""
             },
             "require": {
@@ -239,7 +239,7 @@
                 }
             ],
             "description": "Client for Term API",
-            "time": "2018-12-21T03:23:26+00:00"
+            "time": "2018-12-21T09:41:55+00:00"
         },
         {
             "name": "campo/random-user-agent",
@@ -1787,16 +1787,16 @@
         },
         {
             "name": "thesoftwarefanatics/php-html-parser",
-            "version": "1.8.0",
+            "version": "1.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thesoftwarefanatics/php-html-parser.git",
-                "reference": "3502f0b530b20bea9a72361377510553a69e766a"
+                "reference": "2dff8676821bdbc309f64980a96b4c62020c79c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thesoftwarefanatics/php-html-parser/zipball/3502f0b530b20bea9a72361377510553a69e766a",
-                "reference": "3502f0b530b20bea9a72361377510553a69e766a",
+                "url": "https://api.github.com/repos/thesoftwarefanatics/php-html-parser/zipball/2dff8676821bdbc309f64980a96b4c62020c79c3",
+                "reference": "2dff8676821bdbc309f64980a96b4c62020c79c3",
                 "shasum": ""
             },
             "require": {
@@ -1845,7 +1845,7 @@
                 "html",
                 "parser"
             ],
-            "time": "2018-01-10T14:47:57+00:00"
+            "time": "2018-12-21T07:45:56+00:00"
         }
     ],
     "packages-dev": [],
