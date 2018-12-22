@@ -52,6 +52,11 @@ function image_url($keyword, $img = false)
 	return home_url() . str_slug($keyword) . $ext;
 }
 
+function preview_url($image)
+{
+	return SearchTerm::isCameFromSearchEngine() ? home_url() . '?img=' . urlencode($image['url']) : $image['url'];
+}
+
 function page_url($page)
 {
 	return home_url() . 'pages/' . $page;

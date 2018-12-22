@@ -36,7 +36,7 @@
 		<div class="row">
 			@foreach($chunked as $image)
 				<div class="col-md-4">
-					<a href="{{ $image['url'] }}">
+					<a href="{{ preview_url($image) }}" target="_blank">
 						<img class="img-fluid" src="{{ $image['url'] }}" onerror="this.onerror=null;this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh_l3eQ5xwiPy07kGEXjmjgmBKBRB7H2mRxCGhv1tFWg5c_mWT';"></a>
 					<p>{{ $image['title'] }}</p>
 				</div>

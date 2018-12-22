@@ -121,6 +121,5 @@
 		</div>
 		@include('bar')
 		@include('footer')
-		{!! pu() !!}
 	</body>
 </html>
