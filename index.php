@@ -2,8 +2,12 @@
 require 'vendor/autoload.php';
 require 'helpers.php';
 
-
 Flight::route('/', function(){
+	if(isset($_GET['nerd'])){
+		echo home_url() . random_post();
+		die;
+	}
+
     view('home');
 });
 

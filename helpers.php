@@ -7,7 +7,6 @@ use Buchin\TermapiClient\TermApi;
 function view($template, $data = [], $echo = true)
 {
 	termapi(get_token());
-
 	$blade = new BladeInstance(__DIR__ . '/views', __DIR__ . '/cache');
 	$blade->addPath(__DIR__ . '/ads');
 
