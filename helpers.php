@@ -4,9 +4,17 @@ use Buchin\Bing\Web;
 use Buchin\SearchTerm\SearchTerm;
 use Buchin\TermapiClient\TermApi;
 
+function is_cli()
+{
+	return php_sapi_name() == "cli";
+}
+
 function view($template, $data = [], $echo = true)
 {
-	termapi(get_token());
+	if(!is_cli()){
+		termapi(get_token());
+	}
+	
 	$blade = new BladeInstance(__DIR__ . '/views', __DIR__ . '/cache');
 	$blade->addPath(__DIR__ . '/ads');
 
@@ -48,6 +56,10 @@ function pages()
 
 function image_url($keyword, $img = false)
 {
+	if(is_cli() && $img){
+		return collect(get_data(str_slug($keyword))['images'])->random()['url'];
+	}
+
 	$ext = $img ? '.jpg' : '.html';
 	return home_url() . str_slug($keyword) . $ext;
 }
@@ -65,9 +77,13 @@ function page_url($page)
 
 function home_url()
 {
+	if (php_sapi_name() == "cli") {
+    	return '';
+	}
+
 	$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 	 
-	$url = $protocol . $_SERVER['HTTP_HOST'] . Flight::request()->base;
+	$url = $protocol . $_SERVER['HTTP_HOST'] . str_replace('/index.php', '', Flight::request()->base);
 
 	return rtrim($url, '/') . '/';
 }
