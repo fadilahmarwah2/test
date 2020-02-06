@@ -89,12 +89,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/buchin/google-image-grabber.git",
-                "reference": "9e8d5d19cdb00b8ab7139c03f47282282dbd19b1"
+                "reference": "67411f044fa0222287da212a4b6bfe4c528c8c3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/buchin/google-image-grabber/zipball/9e8d5d19cdb00b8ab7139c03f47282282dbd19b1",
-                "reference": "9e8d5d19cdb00b8ab7139c03f47282282dbd19b1",
+                "url": "https://api.github.com/repos/buchin/google-image-grabber/zipball/67411f044fa0222287da212a4b6bfe4c528c8c3a",
+                "reference": "67411f044fa0222287da212a4b6bfe4c528c8c3a",
                 "shasum": ""
             },
             "require": {
@@ -122,7 +122,7 @@
                 }
             ],
             "description": "Scrape google images",
-            "time": "2018-05-16T12:40:20+00:00"
+            "time": "2020-02-06T02:59:54+00:00"
         },
         {
             "name": "buchin/google-suggest",
