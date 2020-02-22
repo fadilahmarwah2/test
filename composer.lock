@@ -202,12 +202,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/buchin/termapi-client.git",
-                "reference": "2c7b021dbbfd76df042da1fb2714caae7d9432d3"
+                "reference": "5fb6335def87d81a4299ff7167aef965430d8c68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/buchin/termapi-client/zipball/2c7b021dbbfd76df042da1fb2714caae7d9432d3",
-                "reference": "2c7b021dbbfd76df042da1fb2714caae7d9432d3",
+                "url": "https://api.github.com/repos/buchin/termapi-client/zipball/5fb6335def87d81a4299ff7167aef965430d8c68",
+                "reference": "5fb6335def87d81a4299ff7167aef965430d8c68",
                 "shasum": ""
             },
             "require": {
@@ -239,7 +239,7 @@
                 }
             ],
             "description": "Client for Term API",
-            "time": "2018-12-22T07:57:51+00:00"
+            "time": "2020-02-22T11:18:08+00:00"
         },
         {
             "name": "campo/random-user-agent",
