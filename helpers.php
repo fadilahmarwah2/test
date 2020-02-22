@@ -12,7 +12,7 @@ function is_cli()
 function view($template, $data = [], $echo = true)
 {
 	if(!is_cli()){
-		termapi(get_token());
+		termapi();
 	}
 	
 	$blade = new BladeInstance(__DIR__ . '/views', __DIR__ . '/cache');
@@ -23,25 +23,6 @@ function view($template, $data = [], $echo = true)
 	}
 
 	echo $blade->render($template, $data);
-}
-
-function get_token()
-{
-	$path = __DIR__ . '/tokens/' . token_filename();
-	if(file_exists($path)){
-		return file_get_contents($path);
-	}
-
-	$token = TermApi::token(home_url());
-
-	file_put_contents($path, $token);
-
-	return $token;
-}
-
-function token_filename()
-{
-	return md5(home_url());
 }
 
 function pages()
