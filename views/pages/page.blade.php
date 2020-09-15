@@ -1,4 +1,4 @@
-@extends('layout')
+@extends($layout)
 
 @section('head')
 <title>{{ ucwords(str_replace('-', ' ', $page)) }}</title>

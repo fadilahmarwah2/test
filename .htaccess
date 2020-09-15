@@ -1,5 +1,26 @@
+DirectoryIndex index.php
 RewriteEngine on
-RewriteCond %{SCRIPT_FILENAME} !-f
-RewriteCond %{SCRIPT_FILENAME} !-d
-RewriteCond %{SCRIPT_FILENAME} !-l
-RewriteRule ^(.*)$ index.php/$1
+
+#RewriteCond %{HTTPS} off [OR]
+#RewriteCond %{HTTP_HOST} ^www\. [NC]
+#RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+#RewriteRule ^ https://%1%{REQUEST_URI} [L,NE,R=301]
+
+RewriteCond $1 !^(index\.php|(.*)\.swf|forums|images|css|downloads|jquery|js|robots\.txt|favicon\.ico)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ ./index.php?$1 [L,QSA]
+
+<IfModule mod_headers.c>
+    # WEEK
+    <FilesMatch "\.(jpg|jpeg|png|gif|swf|svg|ico)$">
+        Header set Cache-Control "max-age=604800, public"
+    </FilesMatch>
+
+    # WEEK
+    <FilesMatch "\.(js|css|swf)$">
+        Header set Cache-Control "max-age=604800"
+    </FilesMatch>
+</IfModule>
+
+AddType image/x-icon ico

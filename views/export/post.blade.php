@@ -1,13 +1,14 @@
 @php
 	shuffle($sentences);
+	$show_download 	= SHOW_DOWNLOAD;
+	$max_image 		= MAX_IMAGE_RESULT;
 @endphp
 
 @if(!empty($sentences))
 	<p>{{ @array_pop($sentences) }} {{ @array_pop($sentences) }}</p>
 @endif
 
-@foreach(collect($images) as $image)
-	
+@foreach(collect($images)->shuffle()->take($max_image) as $key => $image)
 	<p>
 		<a href="{{ $image['url'] }}">
 		<img class="img-fluid" src="{{ $image['url'] }}" width="100%" onerror="this.onerror=null;this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh_l3eQ5xwiPy07kGEXjmjgmBKBRB7H2mRxCGhv1tFWg5c_mWT';"></a>
@@ -22,7 +23,7 @@
 				@if($loop->first) <strong>{{ ucfirst($keyword) }}</strong>. @endif @foreach($chunked_sentences as $chunked_sentence){{ $chunked_sentence }} @endforeach
 			</p>
 		@endforeach
-				
+		<!--more-->
 	@endif
 
 @endforeach

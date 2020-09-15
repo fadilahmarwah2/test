@@ -1,10 +1,13 @@
 @php
 $default_author = 'Admin';
 $site_url = 'http://example.com/';
-$category = isset($argv[2]) ? $argv[2] : 'Uncategorized';
-$backdate = isset($argv[1]) ? $argv[1] : date('Y-m-d');
+//$backdate = isset($argv[1]) ? strtotime($argv[1]) : strtotime('-1 month');
+$backdate 	= BACK_DATE;
+$schedule 	= SHEDULE_DATE;
+$wp_cat 	= WP_CATEGORY;
+$category 	= isset($argv[2]) ? $argv[2] : $wp_cat;
 @endphp
-{!! '<' . '?' . 'xml version="1.0" encoding="UTF-8"' !!}
+{!! '<' . '?' . "xml version='1.0' encoding='UTF-8'?>" !!}
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.0/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -28,24 +31,21 @@ $backdate = isset($argv[1]) ? $argv[1] : date('Y-m-d');
 
 	@foreach($keywords as $post_id => $keyword)
 		@php
-			$data = get_data(str_slug($keyword));
+			$data = get_data(new_slug($keyword));
 			$data['keyword'] = $keyword;
 			$post_title = $keyword;
-			$slug = str_slug( $post_title );
-			$unixtime = rand(strtotime($backdate), time());
-			$pubdate = date( 'D, d M Y H:i:s', $unixtime )." +0000";
-			$post_date = date( 'Y-m-d H:i:s', $unixtime );
-			$month = date('m', $unixtime);
-			$day = date('d', $unixtime);
-			$year = date('Y', $unixtime);
-
-			$post_content = view('export.post', $data, false);
+			$slug = new_slug( $post_title );
+			$slug = urlencode($slug);
+			$post_date =  date("Y-m-d\TH:i:s\Z", rand(strtotime($backdate), strtotime($schedule)));
+			if(empty($data['images'])){ continue; }
+			$post_content = export('export.post', $data);
+			$post_content = Minify_Html($post_content);
 		@endphp
 		<item>
 			<title><![CDATA[{{ ucwords($keyword) }}]]></title>
 			
 			<link>{{ $site_url }}{{ $slug }}/</link>
-			<pubDate>{{ $pubdate }}</pubDate>
+			<pubDate>{{ date("Y-m-d\TH:i:s\Z") }}</pubDate>
 
 			<dc:creator><![CDATA[{{ $default_author }}]]></dc:creator>
 			<wp:postmeta>
@@ -55,20 +55,20 @@ $backdate = isset($argv[1]) ? $argv[1] : date('Y-m-d');
 
 			@php
 			$category = trim( $category );
-			$cat_slug = str_slug( $category );
+			$cat_slug = new_slug( $category );
 			@endphp
 
 			<category><![CDATA[{{ $category }}]]></category>
 			<category domain="category" nicename="{{ $cat_slug }}"><![CDATA[{{ $category }}]]></category>
 			
 			@php
-				$tags = $data['related'];
+				$tags = $data['related']??'';
 			@endphp
 
 			@foreach ( $tags as $tag )
 				@if( !empty( $tag ))
 					@php
-					$tag_slug = str_slug( $tag );
+					$tag_slug = new_slug( $tag );
 					@endphp
 
 					<category domain="tag" nicename="{{ $tag_slug }}"><![CDATA[{{ $tag }}]]></category>
@@ -81,7 +81,6 @@ $backdate = isset($argv[1]) ? $argv[1] : date('Y-m-d');
 			<content:encoded><![CDATA[{!! $post_content !!}]]></content:encoded>
 			<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 			<wp:post_id>{{ $post_id }}</wp:post_id>
-			<wp:post_date>{{ $post_date }}</wp:post_date>
 			<wp:post_date_gmt>{{ $post_date }}</wp:post_date_gmt>
 			<wp:comment_status>open</wp:comment_status>
 			<wp:ping_status>closed</wp:ping_status>

@@ -1,7 +1,7 @@
 <?php
 // prevent browser
 if(PHP_SAPI !== 'cli'){ die; }
-
+require 'constants.php';
 require 'vendor/autoload.php';
 require 'helpers.php';
 
@@ -23,12 +23,19 @@ $keywords = explode("\n", file_get_contents($argv[1]));
 $keywords = array_map('trim', $keywords);
 $keywords = array_values(array_filter($keywords));
 
+foreach ($keywords as $key => $kw)
+{
+	if(Badwords::isDirty($kw)){
+		unset($keywords[$key]);
+	}
+}
+
 $lang = isset($argv[2]) ? $argv[2] : '';
 $country = isset($argv[3]) ? $argv[3] : '';
 $max = isset($argv[4]) ? $argv[4] : PHP_INT_MAX;
 $source = 'i';
 
-
+$scrap_mode = CONTENT_MODE;
 
 echo "\n
 =================================" . '
@@ -46,8 +53,17 @@ do {
 
 		$keyword = array_shift($keywords);
 
+		if(Badwords::isDirty($keyword))
+		{
+			echo "==> [BADWORD] : {$keyword}...\n";
+			continue;
+		}
+		else
+		{
+			$slug = new_slug($keyword);
 
-		echo '==> scraping #' . $count . ': ' . str_slug($keyword) . "...\n";
+			echo "==> scraping #{$count}: {$slug}...\n";
+		}
 
 		$data = [
 			'related' => [],
@@ -55,9 +71,11 @@ do {
 			'sentences' => [],
 		];
 
-		$sentences = (array)@get_sentences($keyword);
-
-		$data['sentences'] = $sentences;
+		if($scrap_mode !== 'IMAGE_ONLY')
+		{
+			$sentences = (array)@get_sentences($keyword);
+			$data['sentences'] = $sentences;
+		}		
 
 		$related = (array)@GoogleSuggest::grab($keyword, $lang, $country, $source);
 
@@ -77,11 +95,25 @@ do {
 
 		$images = (array)@GoogleImageGrabber::grab($keyword);
 
-		if(!empty($images)){
+		if(!empty($images))
+		{
 			$data['images'] = $images;
 
-			file_put_contents(get_filename($keyword), serialize($data));
+			if($scrap_mode == 'IMAGE_ARTICLE')
+			{
+				if(!empty($data['sentences']))
+				{
+					file_put_contents(get_filename($keyword), serialize($data));
+				}
+			}
+			else
+			{
+				file_put_contents(get_filename($keyword), serialize($data));
+			}
 		}
+
+		echo "==> Finishing..\r\n";
+		sleep(BREAK_TIME);
 
 	} catch (\Exception $e) {
 		echo '===>' . $e->getMessage() . "\n";
